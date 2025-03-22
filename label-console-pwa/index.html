@@ -461,16 +461,27 @@
             console.error("Error fetching folders:", error);
         }
     }
-    async function print(id) {
-        try {
-            let command = dialogFrom.vehicle.value+","+dialogFrom.description.value+","+dialogFrom.price.value+","+dialogFrom.count.value
-            let response = await fetch("/api/run/" + command);
-            let data = await response.json();
-            dialogBackground.classList.add('hidden');
-        } catch (error) {
-            console.error("Error fetching folders:", error);
-        }
+    async function print() {
+    try {
+        let command = {
+            vehicle: dialogFrom.vehicle.value,
+            description: dialogFrom.description.value,
+            price: dialogFrom.price.value,
+            count: dialogFrom.count.value
+        };
+
+        let response = await fetch("/api/run", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(command)
+        });
+
+        let data = await response.json();
+        dialogBackground.classList.add('hidden');
+    } catch (error) {
+        console.error("Error executing print command:", error);
     }
+}
 
     async function save() {
     try {

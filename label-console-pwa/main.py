@@ -7,6 +7,7 @@ from pydantic import BaseModel
 
 app = FastAPI()
 BARTENDER_PATH = ""
+TEMPLATE_PATH = ""
 
 # ✅ Serve index.html on home route
 @app.get("/")
@@ -43,12 +44,28 @@ async def list_sub_files(id: int):
     return JSONResponse(content={"folders": files})
 
 # ✅ Run a Command (Safeguarded)
-@app.get("/api/run/{command}")
-async def run_command(command: str):
-    command_list = ["echo", command]  # Example: Running `echo <command>`
-    result = subprocess.run(command_list, capture_output=True, text=True)
-    return JSONResponse(content={"output": result.stdout.strip()})
+class PrintCommand(BaseModel):
+    vehicle: str
+    description: str
+    price: str
+    count: str
 
+@app.post("/api/run")
+async def run_print_command(command: PrintCommand):
+        cmd = [
+            # "echo", "Hello"
+            BARTENDER_PATH,
+            "/F=" + TEMPLATE_PATH,
+            "/P",
+            f"/C={command.count}",
+            f'/D="Vehicle={command.vehicle};Description={command.description};Price={command.price}"',
+            "/MIN"
+        ]
+        
+        # Run the command
+        result = subprocess.run(cmd, capture_output=True, text=True)
+
+        return {}
 
 class FileCreate(BaseModel):
     id: int
