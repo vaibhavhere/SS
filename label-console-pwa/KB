@@ -19,3 +19,5 @@ Do not use the text field as external source from a text file approach
 
 
 "C:\Program Files\Seagull\BarTender 2019\BarTend.exe" /F="C:\Users\home\Desktop\test.btw" /P /C=5 /D=a.txt /MIN
+
+https://stackoverflow.com/questions/50152251/simple-conversion-from-c-sharp-to-python
