@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SS Label</title>
+</head>
+<style>
+    *,
+    html {
+        scroll-behavior: smooth !important;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        scrollbar-width: thin;
+        box-sizing: border-box;
+    }
+
+    .main {
+        height: 100vh;
+        width: 100vw;
+        background-color: red;
+        display: flex;
+        flex-direction: row;
+        overflow: hidden;
+    }
+
+    .left-pane {
+        display: flex;
+        width: 40%;
+    }
+
+    .alphabets {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .alphabets a {
+        display: flex;
+        align-items: center;
+        /* Centers text vertically */
+        justify-content: center;
+        text-decoration: none;
+        flex: 1 1 auto;
+        color: black;
+        padding: 0rem 1rem;
+        font-size: 1rem;
+        font-weight: bold;
+        box-sizing: border-box;
+        background-color: rgb(245, 245, 245);
+        border: 0.08rem solid grey;
+        border-radius: 0.2rem;
+    }
+
+    .alphabets a:hover {
+        background-color: rgb(200, 200, 200);
+    }
+
+    .right-pane {
+        width: 60%;
+    }
+
+    .dialog {
+        background-color: white;
+        display: block;
+        max-width: 40rem;
+        position: relative;
+        border: 0.2rem solid rgb(185, 255, 185);
+        top: 50%;
+        left: 50%;
+        padding: 1rem;
+        border-radius: 0.8rem;
+        transform: translate(-50%, -50%);
+    }
+
+    .left-pane {
+        background-color: white;
+    }
+
+    .right-pane {
+        background-color: white;
+    }
+
+    input {
+        width: 100%;
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        outline: none;
+        border: none;
+        font-weight: 800;
+        background-color: rgb(245, 245, 245);
+        text-transform: uppercase;
+    }
+
+    input:focus {
+        /* border-bottom: 0.2rem solid black; */
+    }
+
+    .form-wrapper {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .form-wrapper>div * {
+        display: block;
+    }
+
+    .form-wrapper>div {
+        width: 100%;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    input[type="button"] {
+        padding: 0.5rem 1rem;
+        border-radius: 0.4rem;
+    }
+
+    #count {
+        font-size: 2.5rem;
+        font-weight: 500;
+    }
+
+    .save {
+        background-color: rgb(126, 165, 255);
+        color: white;
+    }
+
+    .save:hover {
+        cursor: pointer;
+        background-color: rgb(87, 138, 255);
+    }
+
+    .print {
+        background-color: rgb(123, 220, 123);
+        color: white;
+    }
+
+    .print:hover {
+        cursor: pointer;
+        background-color: rgb(62, 169, 62);
+    }
+
+    .dialog-background {
+        position: absolute;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .rows {
+        overflow: hidden auto;
+        height: 100%;
+        width: 100%;
+    }
+
+    .row {
+        padding: 0.75rem 1.5rem;
+    }
+
+    .row:nth-child(even) {
+        background-color: rgb(245, 245, 245);
+    }
+
+    .row:hover {
+        background-color: rgb(228, 236, 255);
+    }
+
+    .row.active {
+        background-color: rgb(126, 165, 255);
+        color: white;
+    }
+    .form-right-pane div{
+        display: flex;
+        flex-direction: row;
+    }
+    .form-right-pane button{
+        padding: 1rem;
+        border-radius: 1rem;
+        margin: 0 0.5rem;
+        font-size: 1.25rem;
+        width: 100%;
+        border-color: grey;
+    }
+    input:disabled{
+        cursor: not-allowed !important;
+    }
+    button:hover{
+        cursor: pointer;
+        background-color: rgb(189, 189, 189);
+    }
+
+</style>
+
+<body>
+    <div class="dialog-background hidden">
+        <div class="dialog">
+            <form id="dialog-form">
+                <div class="form-wrapper">
+                    <div class="form-left-pane">
+                        <label for="vehicle">Vehicle</label>
+                        <input type="text" id="vehicle">
+                        <label for="description">Desc.</label>
+                        <input type="text" id="description">
+                        <label for="price">Price</label>
+                        <input type="number" id="price">
+                        <input class="save" type="button" value="Save">
+                    </div>
+                    <div class="form-right-pane">
+                        <label for="count">Count</label>
+                        <input type="number" id="count" min="1" value="1">
+                        <div>
+                            <button id="count2" type="button">2</button>
+                            <button id="count5" type="button">5</button>
+                            <button id="count10" type="button">10</button>
+                        </div>
+                        <input class="print" type="button" value="Print">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="main">
+        <div class=" left-pane">
+            <div class="alphabets">
+                <a href="#letter-a">A</a>
+                <a href="#letter-b">B</a>
+                <a href="#letter-c">C</a>
+                <a href="#letter-d">D</a>
+                <a href="#letter-e">E</a>
+                <a href="#letter-f">F</a>
+                <a href="#letter-g">G</a>
+                <a href="#letter-h">H</a>
+                <a href="#letter-i">I</a>
+                <a href="#letter-j">J</a>
+                <a href="#letter-k">K</a>
+                <a href="#letter-l">L</a>
+                <a href="#letter-m">M</a>
+                <a href="#letter-n">N</a>
+                <a href="#letter-o">O</a>
+                <a href="#letter-p">P</a>
+                <a href="#letter-q">Q</a>
+                <a href="#letter-r">R</a>
+                <a href="#letter-s">S</a>
+                <a href="#letter-t">T</a>
+                <a href="#letter-u">U</a>
+                <a href="#letter-v">V</a>
+                <a href="#letter-w">W</a>
+                <a href="#letter-x">X</a>
+                <a href="#letter-y">Y</a>
+                <a href="#letter-z">Z</a>
+            </div>
+            <div class="rows">
+            </div>
+        </div>
+        <div class="right-pane">
+            <div class="rows">
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    let dialogFrom = document.getElementById("dialog-form")
+    let leftPane = document.querySelector('.left-pane')
+    let rightPane = document.querySelector('.right-pane')
+    let dialogBackground = document.querySelector('.dialog-background')
+    let dialog = document.querySelector('.dialog')
+    let printBtn = document.querySelector('.print')
+    let saveBtn = document.querySelector('.save')
+
+    let leftActive, rightActive, fileDataMap = {};
+    dialogBackground.addEventListener('click', (e) => {
+        dialogBackground.classList.add('hidden');
+    })
+    printBtn.addEventListener('click', (e) => {
+        print();
+    })
+    saveBtn.addEventListener('click', (e) => {
+        save();
+    })
+    dialog.addEventListener('click', (e) => {
+        e.stopPropagation();
+    })
+
+    count2.addEventListener('click', (e) => {
+        if(countButtonClicked){
+            dialogFrom.count.value=Number(dialogFrom.count.value)+2
+        }else{
+            dialogFrom.count.value=''
+            dialogFrom.count.value=2
+        }
+        countButtonClicked = true;
+    })
+
+    count5.addEventListener('click', (e) => {
+        if(countButtonClicked){
+            dialogFrom.count.value=Number(dialogFrom.count.value)+5
+        }else{
+            dialogFrom.count.value=''
+            dialogFrom.count.value=5
+        }
+        countButtonClicked = true;
+    })
+
+    count10.addEventListener('click', (e) => {
+        if(countButtonClicked){
+            dialogFrom.count.value=Number(dialogFrom.count.value)+10
+        }else{
+            dialogFrom.count.value=''
+            dialogFrom.count.value=10
+        }
+        countButtonClicked = true;
+    })
+
+    dialogFrom.vehicle.addEventListener('keyup', (e) => {
+        calculateBorderColor();
+        if (e.code == "Enter") {
+            let t = dialogFrom.description.value
+            dialogFrom.description.focus();
+            dialogFrom.description.value = '';
+            dialogFrom.description.value = t;
+        }
+    })
+
+    dialogFrom.description.addEventListener('keyup', (e) => {
+        calculateBorderColor();
+        if (e.code == "Enter") {
+
+            let t = dialogFrom.price.value
+            dialogFrom.price.focus();
+            dialogFrom.price.value = '';
+            dialogFrom.price.value = t;
+        }
+
+    })
+
+    dialogFrom.price.addEventListener('keyup', (e) => {
+        calculateBorderColor();
+    })
+
+    leftPane.querySelector('.rows').addEventListener('click', (e) => {
+        leftActive?.classList.remove('active')
+        leftActive = e.target;
+        leftActive.classList.add('active');
+        renderFiles(leftActive.dataset.rowId);
+    })
+
+    document.querySelector('.alphabets').addEventListener('click', (e) => {
+        leftActive?.classList.remove('active')
+        leftActive = document.querySelector(e.target.hash);
+        leftActive.classList.add('active');
+        renderFiles(leftActive.dataset.rowId);
+    })
+
+
+    rightPane.addEventListener('click', (e) => {
+        console.log(e);
+        if (!e.target.classList.contains('row')) return;
+        rightActive?.classList.remove('active')
+        rightActive = e.target;
+        rightActive.classList.add('active');
+        showDialog(e.target.dataset.rowId);
+    })
+    function calculateBorderColor() {
+        fileId = rightActive.dataset.rowId;
+        if (dialogFrom.description.value == "undefined" || dialogFrom.vehicle.value == "undefined" || dialogFrom.price.value == 0) {
+            dialog.style.borderColor = "red"
+            printBtn.disabled = true;
+            saveBtn.disabled = true;
+
+        }
+        else if (dialogFrom.price.value != fileDataMap[fileId][2] || dialogFrom.vehicle.value != fileDataMap[fileId][0] || dialogFrom.description.value != fileDataMap[fileId][1]) {
+            dialog.style.borderColor = "yellow"
+            printBtn.disabled = false;
+            saveBtn.disabled = false;
+
+        }
+        else {
+            dialog.style.borderColor = "green"
+            printBtn.disabled = false;
+            saveBtn.disabled = false;
+
+        }
+    }
+    let countButtonClicked;
+    function showDialog(fileId) {
+        countButtonClicked = false;
+        dialogBackground.classList.remove('hidden');
+        dialogFrom.count.focus();
+        dialogFrom.count.value = '';
+        dialogFrom.count.value = 1;
+        dialogFrom.vehicle.value = fileDataMap[fileId][0]
+        dialogFrom.description.value = fileDataMap[fileId][1]
+        dialogFrom.price.value = fileDataMap[fileId][2] || 0;
+        calculateBorderColor();
+    }
+    renderFolders()
+    async function renderFolders() {
+        try {
+            let response = await fetch("/api/folders");
+            let data = await response.json();
+            let alphaMap = {};
+            // Use a document fragment for better performance
+            let fragment = document.createDocumentFragment();
+            for (let folder of data.folders) {
+                let div = document.createElement("div");
+                div.classList.add("row");
+                if (!alphaMap[folder.name[0]]) {
+                    div.id = "letter-" + folder.name[0].toLowerCase();
+                    alphaMap[folder.name[0]] = true;
+                }
+
+                div.textContent = folder.name;
+                div.dataset.rowId = folder.id; // Set rowId
+
+                fragment.appendChild(div); // Add to fragment
+            }
+
+            // Replace content in one operation
+            leftPane.querySelector('.rows').replaceChildren(fragment);
+
+            console.log("🚀 ~ renderFolders ~ data:", data);
+        } catch (error) {
+            console.error("Error fetching folders:", error);
+        }
+    }
+
+    async function renderFiles(id) {
+        try {
+            let response = await fetch("/api/folders/" + id);
+            let data = await response.json();
+            let alphaMap = {};
+            // Use a document fragment for better performance
+            let fragment = document.createDocumentFragment();
+            for (let folder of data.folders) {
+                let div = document.createElement("div");
+                div.classList.add("row");
+                div.textContent = folder.name;
+                div.dataset.rowId = folder.id;
+                fileDataMap[folder.id] = [folder.vehicle, folder.description, folder.price]
+                fragment.appendChild(div); // Add to fragment
+            }
+
+            // Replace content in one operation
+            rightPane.querySelector('.rows').replaceChildren(fragment);
+
+            console.log("🚀 ~ renderFolders ~ data:", data);
+        } catch (error) {
+            console.error("Error fetching folders:", error);
+        }
+    }
+    async function print(id) {
+        try {
+            let command = dialogFrom.vehicle.value+","+dialogFrom.description.value+","+dialogFrom.price.value+","+dialogFrom.count.value
+            let response = await fetch("/api/run/" + command);
+            let data = await response.json();
+            dialogBackground.classList.add('hidden');
+        } catch (error) {
+            console.error("Error fetching folders:", error);
+        }
+    }
+
+    async function save() {
+    try {
+        
+        let requestData = {
+            id: rightActive.dataset.rowId, // Get from UI
+            vehicle: dialogFrom.vehicle.value,
+            description: dialogFrom.description.value,
+            price: dialogFrom.price.value
+        };
+        
+        let response = await fetch("/api/files", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(requestData)
+        });
+
+        let folder = await response.json();
+        fileDataMap[folder.id] = [folder.vehicle, folder.description, folder.price]
+        calculateBorderColor();
+    } catch (error) {
+        console.error("Error saving file:", error);
+    }
+}
+
+</script>
+
+</html>
