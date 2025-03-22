@@ -1,2 +1,21 @@
 pip install fastapi uvicorn
 uvicorn main:app --reload
+
+"C:\Users\home\Z - Copy (6) - Copy - Copy.btw"
+
+"C:\Users\home\Desktop\test.btw"
+
+"C:\Program Files (x86)\Seagull\BarTender UltraLite\bartend.exe" /F="C:\Users\home\Desktop\test.btw" /PD /C=5
+
+echo value1,value2,value3 > a.txt
+"C:\Program Files\Seagull\BarTender 2019\BarTend.exe" /F="C:\Users\home\Desktop\test.btw" /P /C=5 /MIN
+
+
+The approach is to setup database as a txt file,
+Then pass in paramter, FINAL.
+
+
+Do not use the text field as external source from a text file approach
+
+
+"C:\Program Files\Seagull\BarTender 2019\BarTend.exe" /F="C:\Users\home\Desktop\test.btw" /P /C=5 /D=a.txt /MIN
