@@ -57,9 +57,14 @@
         border-radius: 0.2rem;
     }
 
-    .alphabets a:hover {
-        background-color: rgb(200, 200, 200);
+    .alphabets a:nth-child(even) {
+        background-color: rgb(220, 220, 220);
     }
+
+    .alphabets a:hover {
+        background-color: rgb(170, 170, 170);
+    }
+
 
     .right-pane {
         width: 60%;
@@ -153,6 +158,7 @@
     }
 
     .dialog-background {
+        z-index: 1;
         position: absolute;
         height: 100vh;
         width: 100vw;
@@ -166,10 +172,12 @@
     }
 
     .row {
+        position: relative;
         padding: 0.75rem 1.5rem;
+        padding-left: 2.5rem;
     }
 
-    .row:nth-child(even) {
+    .row-true {
         background-color: rgb(245, 245, 245);
     }
 
@@ -181,11 +189,13 @@
         background-color: rgb(126, 165, 255);
         color: white;
     }
-    .form-right-pane div{
+
+    .form-right-pane div {
         display: flex;
         flex-direction: row;
     }
-    .form-right-pane button{
+
+    .form-right-pane button {
         padding: 1rem;
         border-radius: 1rem;
         margin: 0 0.5rem;
@@ -193,14 +203,25 @@
         width: 100%;
         border-color: grey;
     }
-    input:disabled{
+
+    input:disabled {
         cursor: not-allowed !important;
     }
-    button:hover{
+
+    button:hover {
         cursor: pointer;
         background-color: rgb(189, 189, 189);
     }
 
+    .bold-letter {
+        pointer-events: none;
+        position: absolute;
+        position: absolute;
+        top: 0.1rem;
+        color: grey;
+        left: 0.5rem;
+        font-size: 1.75rem;
+    }
 </style>
 
 <body>
@@ -234,34 +255,107 @@
     <div class="main">
         <div class=" left-pane">
             <div class="alphabets">
-                <a href="#letter-a">A</a>
-                <a href="#letter-b">B</a>
-                <a href="#letter-c">C</a>
-                <a href="#letter-d">D</a>
-                <a href="#letter-e">E</a>
-                <a href="#letter-f">F</a>
-                <a href="#letter-g">G</a>
-                <a href="#letter-h">H</a>
-                <a href="#letter-i">I</a>
-                <a href="#letter-j">J</a>
-                <a href="#letter-k">K</a>
-                <a href="#letter-l">L</a>
-                <a href="#letter-m">M</a>
-                <a href="#letter-n">N</a>
-                <a href="#letter-o">O</a>
-                <a href="#letter-p">P</a>
-                <a href="#letter-q">Q</a>
-                <a href="#letter-r">R</a>
-                <a href="#letter-s">S</a>
-                <a href="#letter-t">T</a>
-                <a href="#letter-u">U</a>
-                <a href="#letter-v">V</a>
-                <a href="#letter-w">W</a>
-                <a href="#letter-x">X</a>
-                <a href="#letter-y">Y</a>
-                <a href="#letter-z">Z</a>
+                <a id="letter-a-anchor" href="#letter-a">A</a>
+                <a id="letter-b-anchor" href="#letter-b">B</a>
+                <a id="letter-c-anchor" href="#letter-c">C</a>
+                <a id="letter-d-anchor" href="#letter-d">D</a>
+                <a id="letter-e-anchor" href="#letter-e">E</a>
+                <a id="letter-f-anchor" href="#letter-f">F</a>
+                <a id="letter-g-anchor" href="#letter-g">G</a>
+                <a id="letter-h-anchor" href="#letter-h">H</a>
+                <a id="letter-i-anchor" href="#letter-i">I</a>
+                <a id="letter-j-anchor" href="#letter-j">J</a>
+                <a id="letter-k-anchor" href="#letter-k">K</a>
+                <a id="letter-l-anchor" href="#letter-l">L</a>
+                <a id="letter-m-anchor" href="#letter-m">M</a>
+                <a id="letter-n-anchor" href="#letter-n">N</a>
+                <a id="letter-o-anchor" href="#letter-o">O</a>
+                <a id="letter-p-anchor" href="#letter-p">P</a>
+                <a id="letter-q-anchor" href="#letter-q">Q</a>
+                <a id="letter-r-anchor" href="#letter-r">R</a>
+                <a id="letter-s-anchor" href="#letter-s">S</a>
+                <a id="letter-t-anchor" href="#letter-t">T</a>
+                <a id="letter-u-anchor" href="#letter-u">U</a>
+                <a id="letter-v-anchor" href="#letter-v">V</a>
+                <a id="letter-w-anchor" href="#letter-w">W</a>
+                <a id="letter-x-anchor" href="#letter-x">X</a>
+                <a id="letter-y-anchor" href="#letter-y">Y</a>
+                <a id="letter-z-anchor" href="#letter-z">Z</a>
             </div>
             <div class="rows">
+                <div class="row" id="letter-a" data-row-id="1">
+                    <div class="bold-letter">A</div>attachment-service
+                </div>
+                <div class="row row-true" data-row-id="2">attachment-service-lib</div>
+                <div class="row row-true" id="letter-b" data-row-id="3">base-lib</div>
+                <div class="row" data-row-id="4">boot-config-usa</div>
+                <div class="row" data-row-id="5">bpim-service</div>
+                <div class="row" data-row-id="6">bridge-service</div>
+                <div class="row" data-row-id="7">brim-plugin-service</div>
+                <div class="row" id="letter-c" data-row-id="8">catalog-lib</div>
+                <div class="row row-true" data-row-id="9">catalog-service</div>
+                <div class="row row-true" data-row-id="10">circuit-breaker-lib</div>
+                <div class="row row-true" data-row-id="11">configurator-service</div>
+                <div class="row row-true" data-row-id="12">constants-lib</div>
+                <div class="row row-true" id="letter-d" data-row-id="13">data-pipeline-service</div>
+                <div class="row" data-row-id="14">devops-global-eu</div>
+                <div class="row" data-row-id="15">dpscore</div>
+                <div class="row" id="letter-e" data-row-id="16">ecom-mock-http-server</div>
+                <div class="row row-true" data-row-id="17">ecom-ops-web-tradein</div>
+                <div class="row row-true" data-row-id="18">ecom-perf</div>
+                <div class="row row-true" data-row-id="19">ecom-prod-support</div>
+                <div class="row row-true" data-row-id="20">ecom-shipment-tracking-lib</div>
+                <div class="row row-true" data-row-id="21">email-sms-templates-sea</div>
+                <div class="row row-true" data-row-id="22">epp-service</div>
+                <div class="row row-true" data-row-id="23">exchange-compose</div>
+                <div class="row row-true" data-row-id="24">exchange-service</div>
+                <div class="row row-true" id="letter-f" data-row-id="25">fabric-lib</div>
+                <div class="row" data-row-id="26">fraud-service</div>
+                <div class="row" data-row-id="27">fulfillment-adapter-plugin-gerp</div>
+                <div class="row" data-row-id="28">fulfillment-lib</div>
+                <div class="row" data-row-id="29">fulfillment-service</div>
+                <div class="row" id="letter-g" data-row-id="30">gateway</div>
+                <div class="row row-true" id="letter-i" data-row-id="31">identity-store</div>
+                <div class="row" data-row-id="32">identity-store-lib-global</div>
+                <div class="row" id="letter-l" data-row-id="33">lambda-html-pdf</div>
+                <div class="row row-true" id="letter-m" data-row-id="34">mailer</div>
+                <div class="row" id="letter-n" data-row-id="35">node_modules</div>
+                <div class="row row-true" data-row-id="36">notifier</div>
+                <div class="row row-true" id="letter-o" data-row-id="37">ops-catalog-lib</div>
+                <div class="row" data-row-id="38">ops-cs-lib-global</div>
+                <div class="row" data-row-id="39">ops-fulfillment-lib-global</div>
+                <div class="row" data-row-id="40">ops-pricing-lib-global</div>
+                <div class="row" data-row-id="41">ops-spa-bulk-upload</div>
+                <div class="row" data-row-id="42">ops-spa-catalog</div>
+                <div class="row" data-row-id="43">ops-spa-cs</div>
+                <div class="row" data-row-id="44">ops-web-server</div>
+                <div class="row" data-row-id="45">orders-lib-global</div>
+                <div class="row" data-row-id="46">orders-service</div>
+                <div class="row" id="letter-p" data-row-id="47">partner-adapter-lib</div>
+                <div class="row row-true" data-row-id="48">partner-api</div>
+                <div class="row row-true" data-row-id="49">partner-dropship-lib</div>
+                <div class="row row-true" data-row-id="50">payment-adapter-lib-global</div>
+                <div class="row row-true" data-row-id="51">payment-service</div>
+                <div class="row row-true" data-row-id="52">platform-infrastructure-config</div>
+                <div class="row row-true" data-row-id="53">pricing-engine</div>
+                <div class="row row-true" data-row-id="54">pricing-engine-lib-global</div>
+                <div class="row row-true" data-row-id="55">pwa</div>
+                <div class="row row-true" id="letter-s" data-row-id="56">schema-lib</div>
+                <div class="row" data-row-id="57">shipper-service</div>
+                <div class="row" data-row-id="58">shipper-service-lib</div>
+                <div class="row" data-row-id="59">shopping-carts</div>
+                <div class="row" data-row-id="60">shopping-carts-lib-global</div>
+                <div class="row" data-row-id="61">slm-adapter</div>
+                <div class="row" data-row-id="62">sm-shortid</div>
+                <div class="row" data-row-id="63">sso-lib</div>
+                <div class="row" data-row-id="64">sso-service</div>
+                <div class="row" data-row-id="65">subscription-service</div>
+                <div class="row" id="letter-t" data-row-id="66">tax-adapter-lib</div>
+                <div class="row row-true" data-row-id="67">tax-adapter-plugin-vertex</div>
+                <div class="row row-true" data-row-id="68">test-scripts</div>
+                <div class="row row-true" data-row-id="69">test-service</div>
+                <div class="row row-true" id="letter-u" data-row-id="70">utility-lib</div>
+                <div class="row" id="letter-v" data-row-id="71">vertex-adapter-lib</div>
             </div>
         </div>
         <div class="right-pane">
@@ -282,6 +376,7 @@
 
     let leftActive, rightActive, fileDataMap = {};
     dialogBackground.addEventListener('click', (e) => {
+        isDialogOpen = false;
         dialogBackground.classList.add('hidden');
     })
     printBtn.addEventListener('click', (e) => {
@@ -295,31 +390,31 @@
     })
 
     count2.addEventListener('click', (e) => {
-        if(countButtonClicked){
-            dialogFrom.count.value=Number(dialogFrom.count.value)+2
-        }else{
-            dialogFrom.count.value=''
-            dialogFrom.count.value=2
+        if (countButtonClicked) {
+            dialogFrom.count.value = Number(dialogFrom.count.value) + 2
+        } else {
+            dialogFrom.count.value = ''
+            dialogFrom.count.value = 2
         }
         countButtonClicked = true;
     })
 
     count5.addEventListener('click', (e) => {
-        if(countButtonClicked){
-            dialogFrom.count.value=Number(dialogFrom.count.value)+5
-        }else{
-            dialogFrom.count.value=''
-            dialogFrom.count.value=5
+        if (countButtonClicked) {
+            dialogFrom.count.value = Number(dialogFrom.count.value) + 5
+        } else {
+            dialogFrom.count.value = ''
+            dialogFrom.count.value = 5
         }
         countButtonClicked = true;
     })
 
     count10.addEventListener('click', (e) => {
-        if(countButtonClicked){
-            dialogFrom.count.value=Number(dialogFrom.count.value)+10
-        }else{
-            dialogFrom.count.value=''
-            dialogFrom.count.value=10
+        if (countButtonClicked) {
+            dialogFrom.count.value = Number(dialogFrom.count.value) + 10
+        } else {
+            dialogFrom.count.value = ''
+            dialogFrom.count.value = 10
         }
         countButtonClicked = true;
     })
@@ -350,23 +445,38 @@
         calculateBorderColor();
     })
 
+    window.addEventListener('keyup', (e) => {
+        if(!isDialogOpen){
+            if (e.which >= 65 && e.which <= 90){
+                document.getElementById("letter-"+e.key+"-anchor")?.click();
+            }
+        }
+        // calculateBorderColor();
+    })
+
     leftPane.querySelector('.rows').addEventListener('click', (e) => {
-        leftActive?.classList.remove('active')
-        leftActive = e.target;
-        leftActive.classList.add('active');
-        renderFiles(leftActive.dataset.rowId);
+        console.log("🚀 ~ leftPane.querySelector ~ e:", e)
+        newleftActive = e.target;
+        if(newleftActive && leftActive != newleftActive){
+            leftActive?.classList.remove('active')
+            leftActive = newleftActive;
+            leftActive?.classList.add('active');
+            renderFiles(leftActive.dataset.rowId);
+        }
     })
 
     document.querySelector('.alphabets').addEventListener('click', (e) => {
-        leftActive?.classList.remove('active')
-        leftActive = document.querySelector(e.target.hash);
-        leftActive.classList.add('active');
-        renderFiles(leftActive.dataset.rowId);
+        newleftActive = document.querySelector(e.target.hash);
+        if(newleftActive && leftActive != newleftActive){
+            leftActive?.classList.remove('active')
+            leftActive = newleftActive;
+            leftActive?.classList.add('active');
+            renderFiles(leftActive.dataset.rowId);
+        }
     })
 
 
     rightPane.addEventListener('click', (e) => {
-        console.log(e);
         if (!e.target.classList.contains('row')) return;
         rightActive?.classList.remove('active')
         rightActive = e.target;
@@ -395,8 +505,10 @@
         }
     }
     let countButtonClicked;
+    let isDialogOpen = false;
     function showDialog(fileId) {
         countButtonClicked = false;
+        isDialogOpen = true;
         dialogBackground.classList.remove('hidden');
         dialogFrom.count.focus();
         dialogFrom.count.value = '';
@@ -412,17 +524,27 @@
             let response = await fetch("/api/folders");
             let data = await response.json();
             let alphaMap = {};
+            let alternate = false;
             // Use a document fragment for better performance
             let fragment = document.createDocumentFragment();
             for (let folder of data.folders) {
                 let div = document.createElement("div");
                 div.classList.add("row");
+                div.textContent = folder.name;
+
                 if (!alphaMap[folder.name[0]]) {
                     div.id = "letter-" + folder.name[0].toLowerCase();
                     alphaMap[folder.name[0]] = true;
+                    alternate = !alternate;
+                    let cdiv = document.createElement("div");
+                    cdiv.classList.add("bold-letter");
+                    cdiv.textContent = folder.name[0].toUpperCase();
+                    div.appendChild(cdiv); // Add to fragment
+                }
+                if (alternate) {
+                    div.classList.add("row-true");
                 }
 
-                div.textContent = folder.name;
                 div.dataset.rowId = folder.id; // Set rowId
 
                 fragment.appendChild(div); // Add to fragment
@@ -431,9 +553,7 @@
             // Replace content in one operation
             leftPane.querySelector('.rows').replaceChildren(fragment);
 
-            console.log("🚀 ~ renderFolders ~ data:", data);
         } catch (error) {
-            console.error("Error fetching folders:", error);
         }
     }
 
@@ -462,50 +582,51 @@
         }
     }
     async function print() {
-    try {
-        let command = {
-            vehicle: dialogFrom.vehicle.value,
-            description: dialogFrom.description.value,
-            price: dialogFrom.price.value,
-            count: dialogFrom.count.value
-        };
+        try {
+            let command = {
+                vehicle: dialogFrom.vehicle.value,
+                description: dialogFrom.description.value,
+                price: dialogFrom.price.value,
+                count: dialogFrom.count.value
+            };
 
-        let response = await fetch("/api/run", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(command)
-        });
+            let response = await fetch("/api/run", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(command)
+            });
 
-        let data = await response.json();
-        dialogBackground.classList.add('hidden');
-    } catch (error) {
-        console.error("Error executing print command:", error);
+            let data = await response.json();
+            isDialogOpen = false;
+            dialogBackground.classList.add('hidden');
+        } catch (error) {
+            console.error("Error executing print command:", error);
+        }
     }
-}
 
     async function save() {
-    try {
-        
-        let requestData = {
-            id: rightActive.dataset.rowId, // Get from UI
-            vehicle: dialogFrom.vehicle.value,
-            description: dialogFrom.description.value,
-            price: dialogFrom.price.value
-        };
-        
-        let response = await fetch("/api/files", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(requestData)
-        });
+        try {
 
-        let folder = await response.json();
-        fileDataMap[folder.id] = [folder.vehicle, folder.description, folder.price]
-        calculateBorderColor();
-    } catch (error) {
-        console.error("Error saving file:", error);
+            let requestData = {
+                id: rightActive.dataset.rowId, // Get from UI
+                vehicle: dialogFrom.vehicle.value,
+                description: dialogFrom.description.value,
+                price: dialogFrom.price.value
+            };
+
+            let response = await fetch("/api/files", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(requestData)
+            });
+
+            let folder = await response.json();
+            fileDataMap[folder.id] = [folder.vehicle, folder.description, folder.price]
+            calculateBorderColor();
+        } catch (error) {
+            console.error("Error saving file:", error);
+        }
     }
-}
 
 </script>
 

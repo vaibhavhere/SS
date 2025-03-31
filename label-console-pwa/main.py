@@ -8,6 +8,9 @@ from pydantic import BaseModel
 app = FastAPI()
 BARTENDER_PATH = ""
 TEMPLATE_PATH = ""
+# import win32com.client as win32
+# btApp = win32.Dispatch("BarTender.Application")
+# btFormat = btApp.Formats.Open("C:\\Users\\SS Auto\\Desktop\\SS.btw", False, "")
 
 # ✅ Serve index.html on home route
 @app.get("/")
@@ -52,20 +55,13 @@ class PrintCommand(BaseModel):
 
 @app.post("/api/run")
 async def run_print_command(command: PrintCommand):
-        cmd = [
-            # "echo", "Hello"
-            BARTENDER_PATH,
-            "/F=" + TEMPLATE_PATH,
-            "/P",
-            f"/C={command.count}",
-            f'/D="Vehicle={command.vehicle};Description={command.description};Price={command.price}"',
-            "/MIN"
-        ]
-        
-        # Run the command
-        result = subprocess.run(cmd, capture_output=True, text=True)
+    btFormat.SetNamedSubStringValue("vehicle", command.vehicle)
+    btFormat.SetNamedSubStringValue("description", command.description)
+    btFormat.SetNamedSubStringValue("price", command.price)
 
-        return {}
+    btFormat.IdenticalCopiesOfLabel = int(command.count)
+    btFormat.PrintOut(False, False)
+    return {}
 
 class FileCreate(BaseModel):
     id: int
